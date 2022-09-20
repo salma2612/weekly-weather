@@ -28,3 +28,7 @@ border-color: rgb(90, 11, 90);color: rgb(90, 11, 90);}
     
 .card-body{max-width: 780px;}
 .sky-img{width: 600px; text-align: center;}
+
+.c-temp {color: rgb(255, 255, 255); text-decoration: none;}
+
+.c-temp:hover{color: white; cursor:default}

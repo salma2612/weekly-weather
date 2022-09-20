@@ -35,8 +35,9 @@ function showWeather(response) {
   let pressure = document.querySelector("#pressure");
     let description = document.querySelector("#description");
     let mainCloud = document.querySelector("#mainCloud");
+     celsius = response.data.main.temp;
   h1.innerHTML = response.data.name;
-  h2.innerHTML = `${Math.round(response.data.main.temp)}°`;
+  h2.innerHTML = `${Math.round(celsius)}°`;
   min.innerHTML = `Min:${Math.round(response.data.main.temp_min)}°`;
   max.innerHTML = `Max:${Math.round(response.data.main.temp_max)}°`;
   wind.innerHTML = `Wind Speed:${Math.round(response.data.wind.speed)}km/h`;
@@ -53,14 +54,18 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
   let geoURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
-  axios.get(geoURL).then(showWeather);
+    axios.get(geoURL).then(showWeather);
+    fTemp.classList.remove("c-temp");
+    cTemp.classList.add("c-temp");
 }
 
 function seachCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city");
   let cityName = city.value;
-  Getcity(cityName);
+    Getcity(cityName);
+    fTemp.classList.remove("c-temp");
+    cTemp.classList.add("c-temp");
 }
 
 function Getcity(Cityname) {
@@ -70,7 +75,22 @@ function Getcity(Cityname) {
   axios.get(apiURL).then(showWeather);
 }
 
+function getFahren(event) {
+    event.preventDefault();
+    let h2 = document.querySelector("h2")
+h2.innerHTML = ` ${Math.round((celsius * 9) / 5 + 32)}°`;
+    fTemp.classList.add("c-temp")
+    cTemp.classList.remove("c-temp");
+}
+function getCelsius(event) {
+  event.preventDefault();
+  let h2 = document.querySelector("h2");
+  h2.innerHTML = ` ${Math.round(celsius)}°`;
+ fTemp.classList.remove("c-temp");
+ cTemp.classList.add("c-temp");
+}
 
+let celsius = null;
 let geoButton = document.querySelector("#geoButton");
 geoButton.addEventListener("click", navigate);
 function navigate() {
@@ -78,3 +98,10 @@ function navigate() {
 }
 let formInput = document.querySelector("#form-input");
 formInput.addEventListener("submit", seachCity);
+
+let fTemp = document.querySelector(".f-temp")
+fTemp.addEventListener("click", getFahren);
+
+let cTemp = document.querySelector(".c-temp");
+cTemp.addEventListener("click", getCelsius);
+Getcity("paris")
