@@ -33,7 +33,8 @@ function showWeather(response) {
   let wind = document.querySelector("#wind");
   let humidity = document.querySelector("#humidity");
   let pressure = document.querySelector("#pressure");
-  let description = document.querySelector("#description");
+    let description = document.querySelector("#description");
+    let mainCloud = document.querySelector("#mainCloud");
   h1.innerHTML = response.data.name;
   h2.innerHTML = `${Math.round(response.data.main.temp)}°`;
   min.innerHTML = `Min:${Math.round(response.data.main.temp_min)}°`;
@@ -42,8 +43,9 @@ function showWeather(response) {
   humidity.innerHTML = `Humidity:${response.data.main.humidity}%`;
   pressure.innerHTML = `Pressure:${response.data.main.pressure} mb`;
   description.innerHTML = `${response.data.weather[0].description}`;
-
-  console.log(response.data);
+mainCloud.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  mainCloud.setAttribute("alt", response.data.weather[0].description )
+    console.log(response.data);
 }
 
 function getPosition(position) {
