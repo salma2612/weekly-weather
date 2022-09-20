@@ -46,7 +46,7 @@ function showWeather(response) {
   description.innerHTML = `${response.data.weather[0].description}`;
 mainCloud.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   mainCloud.setAttribute("alt", response.data.weather[0].description )
-    console.log(response.data);
+   
 }
 
 function getPosition(position) {
