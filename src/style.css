@@ -1,3 +1,23 @@
+body{font-family: 'Inconsolata', monospace; color: white;}
+h1, h2{text-align: center; font-size: 30px;}
+h2{ border: solid;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 70px;}
+    li{list-style-type: none; }
+#min, #max {font-weight: 600;
+     background: #1717176e;
+     padding: 9px;
+     border-radius: 5px;}
+
+
+.units {
+    float: right;
+    margin-right: 5px;
+    margin-top: 16px;
+    font-weight: bold;
+}
+
 .form{width: auto;border-radius: 5px;
     padding: 4px; margin-bottom: 8px; margin-top: 4px;
 border-color: rgb(90, 11, 90);color: rgb(90, 11, 90);}
@@ -5,3 +25,6 @@ border-color: rgb(90, 11, 90);color: rgb(90, 11, 90);}
     margin-top: 4px;
     margin-bottom: 8px;
     border-radius: 6px;}
+    
+.card-body{max-width: 780px;}
+.sky-img{width: 600px; text-align: center;}
