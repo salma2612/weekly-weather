@@ -10,7 +10,15 @@ let days = [
 ];
 let day = days[now.getDay()];
 let mins = now.getMinutes();
+if (mins < 10) {
+    mins = `0${mins}`;
+    
+}
 let hours = now.getHours();
+if (hours < 10) {
+    hours = `0${hours}`;
+    
+}
 let fullDate = `${day} ${hours}:${mins}`;
 
 let h3 = document.querySelector("h3");
@@ -59,12 +67,12 @@ function Getcity(Cityname) {
   let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${Cityname}&appid=${apiKey}&units=metric`;
   axios.get(apiURL).then(showWeather);
 }
-function navigate() {
-  navigator.geolocation.getCurrentPosition(getPosition);
-}
+
 
 let geoButton = document.querySelector("#geoButton");
 geoButton.addEventListener("click", navigate);
-
+function navigate() {
+  navigator.geolocation.getCurrentPosition(getPosition);
+}
 let formInput = document.querySelector("#form-input");
 formInput.addEventListener("submit", seachCity);
