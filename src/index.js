@@ -89,6 +89,19 @@ function getCelsius(event) {
  cTemp.classList.add("c-temp");
 }
 
+let forecastHTML = document.querySelector("#forecastHTML");
+let forecastElement = `<div class = row>`
+let javaDays = [`fri`, `sat`, `sun` , `mon`, `tue`, `wed`];
+javaDays.forEach((day) => {
+  forecastElement =
+    forecastElement +
+    ` <div class="col-2"><h5>${day}</h5>
+        <img src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" alt="">
+        <p>22*</p></div>`;
+});
+forecastElement = forecastElement + `</div>`;
+forecastHTML.innerHTML = forecastElement;
+
 let celsius = null;
 let geoButton = document.querySelector("#geoButton");
 geoButton.addEventListener("click", navigate);
