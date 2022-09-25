@@ -92,23 +92,26 @@ function getCelsius(event) {
 function getWeekData(response) {
     //console.log(response)
     let apiKey = "515c9ddbeb3cda9061acfab71031839e";
-    let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.lat}&lon=${response.lon}&appid=${apiKey}`;
+    let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.lat}&lon=${response.lon}&appid=${apiKey}&units=metric`;
     axios.get(apiURL).then(getForecastWeek)
 
 }
 function getForecastWeek(response) {
-    
-    console.log(response.data.daily)
+    let eachDay = response.data.daily;
+    console.log(eachDay);
 
     let forecastHTML = document.querySelector("#forecastHTML");
     let forecastElement = `<div class = row>`
-    let javaDays = [`fri`, `sat`, `sun`, `mon`, `tue`, `wed`];
-    javaDays.forEach((day) => {
+    eachDay.forEach((day) => {
         forecastElement =
             forecastElement +
-            ` <div class="col-2"><h5>${day}</h5>
-        <img src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" alt="">
-        <p>22*</p></div>`;
+            ` <div class="col-2"><h5>${day.dt}</h5>
+         <img src= "http://openweathermap.org/img/wn/${
+          day.weather[0].icon
+        }@2x.png" alt="" width=42px/>
+        <span>${Math.round(day.temp.max)}°</span><span>${Math.round(
+            day.temp.min
+          )}°</span></div>`;
     });
     forecastElement = forecastElement + `</div>`;
     forecastHTML.innerHTML = forecastElement;
