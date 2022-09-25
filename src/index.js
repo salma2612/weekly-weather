@@ -46,7 +46,7 @@ function showWeather(response) {
   description.innerHTML = `${response.data.weather[0].description}`;
 mainCloud.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   mainCloud.setAttribute("alt", response.data.weather[0].description )
-   
+    getWeekData(response.data.coord);
 }
 
 function getPosition(position) {
@@ -89,18 +89,31 @@ function getCelsius(event) {
  cTemp.classList.add("c-temp");
 }
 
-let forecastHTML = document.querySelector("#forecastHTML");
-let forecastElement = `<div class = row>`
-let javaDays = [`fri`, `sat`, `sun` , `mon`, `tue`, `wed`];
-javaDays.forEach((day) => {
-  forecastElement =
-    forecastElement +
-    ` <div class="col-2"><h5>${day}</h5>
+function getWeekData(response) {
+    //console.log(response)
+    let apiKey = "515c9ddbeb3cda9061acfab71031839e";
+    let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.lat}&lon=${response.lon}&appid=${apiKey}`;
+    axios.get(apiURL).then(getForecastWeek)
+
+}
+function getForecastWeek(response) {
+    
+    console.log(response.data.daily)
+
+    let forecastHTML = document.querySelector("#forecastHTML");
+    let forecastElement = `<div class = row>`
+    let javaDays = [`fri`, `sat`, `sun`, `mon`, `tue`, `wed`];
+    javaDays.forEach((day) => {
+        forecastElement =
+            forecastElement +
+            ` <div class="col-2"><h5>${day}</h5>
         <img src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png" alt="">
         <p>22*</p></div>`;
-});
-forecastElement = forecastElement + `</div>`;
-forecastHTML.innerHTML = forecastElement;
+    });
+    forecastElement = forecastElement + `</div>`;
+    forecastHTML.innerHTML = forecastElement;
+}
+
 
 let celsius = null;
 let geoButton = document.querySelector("#geoButton");
